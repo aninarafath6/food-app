@@ -1,33 +1,18 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_chef_moblie_apa/views/home/components/categorys.dart';
+import 'package:home_chef_moblie_apa/views/home/components/heading.dart';
 
 class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            heding(),
-
-          ],
-        ),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        heding(),
+        SizedBox(height: 20),
+        Categorys(),
+      ],
     );
-  }
-
-  Text heding() {
-    return Text(
-            'Hi, Anin \nWhat will we order?',
-            style: GoogleFonts.aBeeZee(
-              textStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-            ),
-          );
   }
 }

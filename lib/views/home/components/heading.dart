@@ -7,8 +7,12 @@ Padding heding() {
     child: Text(
       'Hi, Anin \nWhat will we order?',
       style: GoogleFonts.aBeeZee(
-        textStyle: TextStyle(
-            color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+        textStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          height: 1.5,
+        ),
       ),
     ),
   );

@@ -14,7 +14,9 @@ class _CategorysState extends State<Categorys> {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 50,
       child: Padding(
         padding: const EdgeInsets.only(
           left: 25,

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:home_chef_moblie_apa/constants/colors.dart';
+import 'package:get/get.dart';
+import 'package:home_chef_moblie_apa/controllers/dishesController/dishController.dart';
 import 'package:home_chef_moblie_apa/views/home/components/appBar.dart';
 import 'package:home_chef_moblie_apa/views/home/components/categorys.dart';
-import 'package:home_chef_moblie_apa/views/home/components/heading.dart';
+import 'package:home_chef_moblie_apa/views/home/components/dishCard.dart';
 
 class HomeBody extends StatelessWidget {
+  DishController dishController = Get.put(DishController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,40 +20,33 @@ class HomeBody extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: StaggeredGridView.countBuilder(
-              physics: BouncingScrollPhysics(),
-              crossAxisCount: 2,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 280,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: primeryLight,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(5),
+            child: GetX<DishController>(builder: (controller) {
+              return Container(
+                child: controller.isLoading.value
+                    ? Center(
+                        child: CircularProgressIndicator(
+                        color: Colors.orange,
+                      ))
+                    : StaggeredGridView.countBuilder(
+                        physics: BouncingScrollPhysics(),
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        itemCount: controller.totalDishes,
+                        itemBuilder: (context, index) {
+                          return DishCard(
+                            isFavorate: false,
+                            name: controller.dishes[index].dishName,
+                            price: controller.dishes[index].dishPrice,
+                            image: controller.dishes[index].dishImage,
+                            id: controller.dishes[index].id,
+                          );
+                        },
+                        staggeredTileBuilder: (int index) =>
+                            StaggeredTile.fit(1),
                       ),
-                      border: Border.all(
-                        width: .2,
-                        color: Colors.white30,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 8,
-                          spreadRadius: 2,
-                          color: Colors.black26,
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              },
-              staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
-            ),
+              );
+            }),
           ),
         ),
       ],

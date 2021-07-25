@@ -34,28 +34,3 @@ class HomeAppBar extends StatelessWidget {
     );
   }
 }
-
-// return AppBar(
-//       backgroundColor: Colors.transparent,
-//       elevation: 0,
-//       toolbarHeight: 500,
-//       leadingWidth: 1000,
-//       leading: Text(
-//         'Hi, Anin \nWhat will we order?',
-//         style: GoogleFonts.aBeeZee(
-//           textStyle: const TextStyle(
-//             color: Colors.white,
-//             fontSize: 20,
-//             fontWeight: FontWeight.bold,
-//             height: 1.5,
-//           ),
-//         ),
-//       ),
-//       actions: [
-//         Ibutton(
-//           icon: Icons.shopping_bag_outlined,
-//           onClick: () {},
-//         ),
-//       ],
-//     );
-//   }

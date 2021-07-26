@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:home_chef_moblie_apa/models/dishModel.dart';
 
@@ -10,7 +8,6 @@ class DishController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     fetchAllDishes();
   }

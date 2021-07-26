@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:home_chef_moblie_apa/constants/colors.dart';
+import 'package:home_chef_moblie_apa/controllers/favoriteController/favoriteController.dart';
+import 'package:home_chef_moblie_apa/models/dishModel.dart';
 
 class DishCard extends StatelessWidget {
-  final bool isFavorate;
-  final String name;
-  final num price;
-  final String image;
-  final int id;
+  final Dish dish;
 
-  const DishCard({
+  FavoriteController favoriteController = Get.put(FavoriteController());
+  DishCard({
     Key? key,
-    required this.isFavorate,
-    required this.name,
-    required this.price,
-    required this.image,
-    required this.id,
+    required this.dish,
   }) : super(key: key);
 
   @override
@@ -47,21 +43,33 @@ class DishCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  isFavorate ? Icons.favorite : Icons.favorite_border_rounded,
-                  color: isFavorate ? Colors.orange : Colors.grey,
-                  size: 20,
+            GetX<FavoriteController>(builder: (controller) {
+              return Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    radius: 5,
+                    onTap: () {
+                      controller.addToFavorite(dish);
+                    },
+                    child: Icon(
+                      controller.isAdded(dish.id) >= 0
+                          ? Icons.favorite
+                          : Icons.favorite_border_rounded,
+                      color: controller.isAdded(dish.id) >= 0
+                          ? Colors.orange
+                          : Colors.grey,
+                      size: 20,
+                    ),
+                  ),
                 ),
-              ),
-            ),
+              );
+            }),
             Container(
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width * .35,
-              child: Image.asset(image, fit: BoxFit.cover),
+              child: Image.asset(dish.dishImage, fit: BoxFit.cover),
             ),
             SizedBox(
               height: 10,
@@ -71,7 +79,7 @@ class DishCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  name,
+                  dish.dishName,
                   overflow: TextOverflow.ellipsis,
                   // maxLines: 2,
                   style: GoogleFonts.mulish(
@@ -91,7 +99,7 @@ class DishCard extends StatelessWidget {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      '\$ ${price}',
+                      '\$ ${dish.dishPrice.toString()}',
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.mulish(
                           color: Colors.white,

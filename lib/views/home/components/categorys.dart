@@ -40,9 +40,6 @@ class _CategorysState extends State<Categorys> {
                       style: GoogleFonts.mulish(
                         textStyle: TextStyle(
                           fontSize: 15,
-                          decoration: controller.selectedIndex.value == index
-                              ? TextDecoration.underline
-                              : TextDecoration.none,
                           color: controller.selectedIndex.value == index
                               ? Colors.orange
                               : Colors.white60,

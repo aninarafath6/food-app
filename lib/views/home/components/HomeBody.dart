@@ -34,13 +34,7 @@ class HomeBody extends StatelessWidget {
                         mainAxisSpacing: 10,
                         itemCount: controller.totalDishes,
                         itemBuilder: (context, index) {
-                          return DishCard(
-                            isFavorate: false,
-                            name: controller.dishes[index].dishName,
-                            price: controller.dishes[index].dishPrice,
-                            image: controller.dishes[index].dishImage,
-                            id: controller.dishes[index].id,
-                          );
+                          return DishCard(dish: controller.dishes[index]);
                         },
                         staggeredTileBuilder: (int index) =>
                             StaggeredTile.fit(1),
